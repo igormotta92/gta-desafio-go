@@ -5,9 +5,9 @@ import (
 )
 
 type Client struct {
-	name string
+	name     string
 	quantity uint
-	total float32
+	total    float32
 }
 
 func (c *Client) calculateTotal() {
@@ -18,54 +18,52 @@ func (c *Client) calculateTotal() {
 func main() {
 
 	var clients []Client
-	
+
 	fmt.Println("Bem-vindo ao sistema de reservade tickets")
-	
+
 	for {
 		var clientName string
 		var qtd uint
 		var confirm string
-	
+
 		fmt.Printf("Qual seu nome? ")
 		fmt.Scan(&clientName)
 
-		fmt.Printf("Quantos tickets você quer reservar? ")
-	
+		fmt.Printf("Quantos tickets você quer reservar? (Unidade R$15,50) ")
+
 		fmt.Scan(&qtd)
-		
-		fmt.Println(clientName,", você confirma a reserva de", qtd, "tickets? (s/n): ")
-	
+
+		fmt.Println(clientName, ", você confirma a reserva de", qtd, "tickets? (s/n): ")
+
 		fmt.Scan(&confirm)
 
 		if confirm == "n" {
 			continue
 		}
-	
+
 		client := Client{
-			name: clientName,
+			name:     clientName,
 			quantity: qtd,
 		}
 
 		client.calculateTotal()
-	
+
 		clients = append(clients, client)
-	
+
 		fmt.Println("Wow.. seus tickets foram reservados!!!")
-	
+
 		fmt.Printf("Quer reservar mais tickets? (s/n): ")
-		
+
 		fmt.Scan(&confirm)
 
 		if confirm == "n" {
 			break
 		}
-		
+
 	}
 
-	
 	tabela(clients)
 }
-
 
 func StrPadLeft(input string, padLength int, padString string) string {
 	output := padString
@@ -82,7 +80,7 @@ func StrPadLeft(input string, padLength int, padString string) string {
 }
 
 func tabela(clients []Client) {
-	
+
 	nome := StrPadLeft("Nome", 10, " ")
 	qtd := StrPadLeft("Quantidade", 10, " ")
 	total := StrPadLeft("Total", 10, " ")
@@ -101,11 +99,9 @@ func tabela(clients []Client) {
 		qtd := StrPadLeft(sqtd, 10, " ")
 		total := StrPadLeft(stotal, 10, " ")
 
-
 		line := fmt.Sprintf("%s %s %s \n\r", name, qtd, total)
 
 		fmt.Printf(line)
 	}
-	
-}
 
+}
